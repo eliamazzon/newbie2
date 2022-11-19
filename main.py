@@ -1,19 +1,11 @@
-import pyttsx3
-engine = pyttsx3.init("espeak") # object creation
+#!/usr/bin/env python3
 
-""" RATE"""
-rate = engine.getProperty('rate')   # getting details of current speaking rate
-print (rate)                        #printing current voice rate
-engine.setProperty('rate', 200)     # setting up new voice rate
+from hotword_detector import detector 
 
+#CONFIGURATION PARAMETERS
+ACCESS_KEY = 'Zu669csCgbvTaWn0PlJQMl7gh52UA7InfS3m61avjhmoXTCtrf/6wQ==' 
+KEYWORDS_PATHS = ['keywords/hey_newbie_linux_v2_1_0.ppn',
+          'keywords/Okay-Newbie_en_linux_v2_1_0.ppn']
 
-"""VOLUME"""
-volume = engine.getProperty('volume')   #getting to know current volume level (min=0 and max=1)
-print (volume)                          #printing current volume level
-engine.setProperty('volume',1.0)    # setting up volume level  between 0 and 1
-
-engine.say("Hello Sir. I'm online and ready.")
-engine.runAndWait()
-engine.stop()
-
-
+if detector(KEYWORDS_PATHS, ACCESS_KEY) == True:
+    print("Online and Ready")
