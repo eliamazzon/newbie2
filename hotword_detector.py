@@ -22,9 +22,12 @@ def detector(keywords,a_key):
                             format=pyaudio.paInt16,
                             input=True,
                             frames_per_buffer=porcupine.frame_length)
+        print(porcupine.sample_rate)
+
 
         while True: #endless detector loop
             pcm = audio_stream.read(porcupine.frame_length)
+            #print(porcupine.frame_length)
             pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
 
             keyword_index = porcupine.process(pcm)
