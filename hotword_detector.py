@@ -25,7 +25,7 @@ def detector(keywords,a_key):
         return True
                 
     except Exception as e:
-        print(f"ERROR: {e}")
+        print(f"Module: hotword_detector.py/detector ERROR: {e}")
         
     finally:
         if porcupine is not None:

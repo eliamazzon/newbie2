@@ -20,9 +20,7 @@ def int_detector(context,a_key):
         
         #print(rhino.context_info)
         
-        print("Listening...")
-        print()
-    
+        print("Listening...")    
         
         while True:
                 pcm = record()
@@ -47,6 +45,6 @@ def int_detector(context,a_key):
         return inference
                 
     except Exception as e:
-        print(f"ERROR: {e}")
+        print(f"Module: intent_detector.py/int_detector ERROR: {e}")
     
     

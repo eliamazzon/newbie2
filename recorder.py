@@ -9,5 +9,3 @@ def record():
         return audio
     except Exception as e:
         print(f"Module: recorder.py/record ERROR: {e}")
-    
-    
