@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import pvporcupine
-import pyaudio
 import struct
-
+from recorder import record
 
 
 
@@ -14,22 +13,10 @@ def detector(keywords,a_key):
         access_key = a_key,
         keyword_paths = keywords
         )
-        pa = pyaudio.PyAudio() #initiate pyaudio to record audio
-
-        audio_stream = pa.open( #define and format audio_stream
-                            rate=porcupine.sample_rate,
-                            channels=1,
-                            format=pyaudio.paInt16,
-                            input=True,
-                            frames_per_buffer=porcupine.frame_length)
-        print(porcupine.sample_rate)
-
 
         while True: #endless detector loop
-            pcm = audio_stream.read(porcupine.frame_length)
+            pcm = record()
             #print(porcupine.frame_length)
-            pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
-
             keyword_index = porcupine.process(pcm)
 
             if keyword_index >= 0:
@@ -43,7 +30,4 @@ def detector(keywords,a_key):
     finally:
         if porcupine is not None:
             porcupine.delete()
-        if audio_stream is not None:
-            audio_stream.close()
-        if pa is not None:
-                pa.terminate()
+        

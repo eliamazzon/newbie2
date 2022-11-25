@@ -1,15 +1,7 @@
 #!/usr/bin/env python3
 
 import pvrhino
-import pyaudio
-import struct
-from pvrecorder import PvRecorder
-
-ACCESS_KEY = 'Zu669csCgbvTaWn0PlJQMl7gh52UA7InfS3m61avjhmoXTCtrf/6wQ==' 
-context_path = 'contexts/Newbie-Music_en_linux_v2_1_0.rhn'
-
-
-
+from recorder import record
 
 
 def int_detector(context,a_key):
@@ -26,23 +18,14 @@ def int_detector(context,a_key):
         endpoint_duration_sec = 0.7
         )        
         
-        recorder = PvRecorder(device_index=-1, 
-                              frame_length=rhino.frame_length)
-        recorder.start()
-        
         #print(rhino.context_info)
         
-        
-        print("Using device: %s" % recorder.selected_device)
         print("Listening...")
         print()
     
         
         while True:
-                pcm = recorder.read()
-
-                if wav_file is not None:
-                    wav_file.writeframes(struct.pack("h" * len(pcm), *pcm))
+                pcm = record()
 
                 is_finalized = rhino.process(pcm)
                 if is_finalized:
@@ -58,7 +41,8 @@ def int_detector(context,a_key):
                         
                         break
                     else:
-                        #print("Didn't understand the command.\n")       
+                        print("Didn't understand the command.\n")    
+                        break
                 
         return inference
                 

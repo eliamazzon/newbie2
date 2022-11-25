@@ -13,10 +13,10 @@ context_path = 'contexts/Newbie-Music_en_linux_v2_1_0.rhn'
     
 while True:
     if detector(KEYWORDS_PATHS, ACCESS_KEY) == True:
-        print("How can I help u sir?\n")
+        print("How can I help u sir?")
         command = int_detector(context_path,ACCESS_KEY)
         print(command.intent)
-        break
+        pass
         
         
         
